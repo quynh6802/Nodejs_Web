@@ -1,0 +1,34 @@
+<%-include("./layouts/head.ejs",{title:"Category"})%>
+<%-include("./layouts/header.ejs")%>
+<%-include("./layouts/menu.ejs")%>
+<%-include("./layouts/slider.ejs")%>
+<!--	List Product	-->
+<div class="products">
+  <h3><%=category.title%> (hiện có <%=total%> sản phẩm)</h3>
+  <div class="product-list card-deck">
+    <%for(product of products){%>
+    <%-include("./components/product-item",{product})%>
+    <%}%>
+  </div>
+</div>
+<!--	End List Product	-->
+
+<div id="pagination">
+  <ul class="pagination">
+    <%if(pages.hasPrev){%>
+    <li class="page-item"><a class="page-link" href="<%=url%>?page=<%=pages.prev%>">&laquo;</a></li>
+    <%}%>
+    <%for(i of pages.pages){%>
+    <%if(i==="..."){%>
+    <li class="page-item"><span class="page-link"><%=i%></span></li>
+    <%}else{%>
+    <li class="page-item <%=i===page?'active':''%>"><a class="page-link" href="<%=url%>?page=<%=i%>"><%=i%></a></li>
+    <%}%>
+    <%}%>
+    <%if(pages.hasNext){%>
+    <li class="page-item"><a class="page-link" href="<%=url%>?page=<%=pages.next%>">&raquo;</a></li>
+    <%}%>
+  </ul>
+  </div>
+  <%-include("./layouts/sidebar.ejs")%>
+    <%-include("./layouts/footer.ejs")%>
